@@ -1,6 +1,7 @@
 set -e
 
+mkdir -p /usr/local/etc/todo
 g++ src/main.cpp
-mkdir -p tmp
-mv a.out tmp
-./tmp/a.out $@
+BIN_DIR=/usr/local/bin
+mv a.out $BIN_DIR/todo
+todo $@

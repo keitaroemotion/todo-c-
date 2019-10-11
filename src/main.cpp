@@ -13,7 +13,7 @@ using namespace std;
 // --rm,     -r ... remove [TODO]
 //
 //
-const string TODOS_DSL_FILE_PATH = "dsl.txt";
+const string TODOS_DSL_FILE_PATH = "/usr/local/etc/todo/dsl.txt";
 
 bool startsWith(char *text)
 {
