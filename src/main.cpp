@@ -6,27 +6,18 @@ using namespace std;
 
 // argv ... array of input argument
 //
-// --list,   -l ... enlist the todo tasks
-// --filter, -f ... filter by query
-// --date,   -d ... filter by date 
-// --add,    -a ... add    [TODO]
-// --rm,     -r ... remove [TODO]
+// -l ... enlist the todo tasks
+// -f ... filter by query
+// -d ... filter by date 
+// -a ... add    [TODO]
+// -r ... remove [TODO]
 //
 //
 const string TODOS_DSL_FILE_PATH = "/usr/local/etc/todo/dsl.txt";
 
 bool startsWith(char *text)
 {
-    int i = 0;
-    while (text[i] != '\0')
-    {
-        if(text[i-1] == '-' && text[i] == '-')
-        {
-            return true;
-        }
-        i++;
-    }
-    return false;
+    return text[0] == '-';
 }
 
 void print(string text)
@@ -51,7 +42,6 @@ int main(int argc, char *argv[])
     {
         if(startsWith(argv[i]))
         {
-            print(argv[i]);
             char *nextArg = argv[i + 1];
 
             if(i < argc - 1) 
@@ -63,15 +53,15 @@ int main(int argc, char *argv[])
     }
 
     //enlist TODO tags
-    if(argm["--list"] != "")
+    if(argm["-l"] != "")
     {
-        print(argm["--list"]);
+        print(argm["-l"]);
     }
 
-    if(argm["--add"] != "")
+    if(argm["-a"] != "")
     {
-        writeToFile(TODOS_DSL_FILE_PATH, argm["--add"]);
-        print(argm["--add"]);
+        writeToFile(TODOS_DSL_FILE_PATH, argm["-a"]);
+        print(argm["-a"]);
     }
 
     return 0;
