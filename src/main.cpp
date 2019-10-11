@@ -11,11 +11,47 @@ using namespace std;
 // --rm,     -r ... remove [TODO]
 //
 
+char* appendCharToCharArray(char* text, char particle)
+{
+    size_t len     = strlen(text);
+    char* newText  = new char[len + 2];
+    strcpy(newText, text);
+    newText[len]   = particle;
+    newText[len+1] = '\0'; 
+    return newText;
+}
+
+bool startsWith(char *text)
+{
+    char* option      = new char[50];
+    bool  option_flag = false;
+
+    int i =0;
+    while (text[i] != '\0'){
+        if(text[i-1] == '-' && text[i] == '-'){
+            option_flag = true; 
+            cout << option_flag << endl;
+        }
+        else if(option_flag == true && text[i] == ' ')
+        {
+        }
+        else if(option_flag == true && text[i] != ' ')
+        {
+            const char *_text = &text[i];
+            strcpy(option, _text);
+        }
+        i++;
+    }
+    return true;
+}
+
 int main(int argc, char *argv[])
 {
-    for(unsigned int x = 0; x < argc; x = x + 1 )
+    for(unsigned int i = 0; i < argc; i = i + 1 )
     {
-        cout << argv[x] << endl;
+        if(startsWith(argv[i])){
+            cout << argv[i] << endl;
+        }
     }
 
     return 0;
