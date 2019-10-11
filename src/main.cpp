@@ -14,6 +14,8 @@ using namespace std;
 //
 //
 const string TODOS_DSL_FILE_PATH = "/usr/local/etc/todo/dsl.txt";
+const string OP_LIST             = "-l"
+const string OP_ADD              = "-a"
 
 bool startsWith(char *text)
 {
@@ -53,15 +55,15 @@ int main(int argc, char *argv[])
     }
 
     //enlist TODO tags
-    if(argm["-l"] != "")
+    if(argm[OP_LIST] != "")
     {
-        print(argm["-l"]);
+        print(argm[OP_LIST]);
     }
 
-    if(argm["-a"] != "")
+    if(argm[OP_ADD] != "")
     {
-        writeToFile(TODOS_DSL_FILE_PATH, argm["-a"]);
-        print(argm["-a"]);
+        writeToFile(TODOS_DSL_FILE_PATH, argm[OP_ADD]);
+        print(argm[OP_ADD]);
     }
 
     return 0;
