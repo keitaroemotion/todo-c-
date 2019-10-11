@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 
     if(argm[OP_DUE_DATE] != "")
     {
-       if(!regex_match(argm[OP_DUE_DATE], regex("^([\\d]+)$")))
+       if(!regex_match(argm[OP_DUE_DATE], regex("^([\\d]{8})$")))
        {
            print("\ndue date format error: \n\n-t [yyyymmdd]\n");
            return 1;
