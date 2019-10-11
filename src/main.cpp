@@ -17,7 +17,7 @@ const string TODOS_DSL_FILE_PATH = "/usr/local/etc/todo/dsl.txt";
 
 bool startsWith(char *text)
 {
-    int i =0;
+    int i = 0;
     while (text[i] != '\0')
     {
         if(text[i-1] == '-' && text[i] == '-')
