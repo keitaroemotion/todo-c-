@@ -1,4 +1,5 @@
 #include<iostream>
+#include<map>
 
 using namespace std;
 
@@ -25,12 +26,16 @@ bool startsWith(char *text)
 
 int main(int argc, char *argv[])
 {
+    map<string, string> argm;
+
     for(unsigned int i = 0; i < argc; i = i + 1 )
     {
         if(startsWith(argv[i])){
             cout << argv[i] << endl;
+            argm[argv[i]] = "xxx";
         }
     }
 
+    cout << argm["--aaa"] << endl;
     return 0;
 }
