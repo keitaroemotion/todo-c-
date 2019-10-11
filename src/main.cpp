@@ -26,6 +26,11 @@ bool startsWith(char *text)
     return false;
 }
 
+void print(string text)
+{
+    cout << text << endl;
+}
+
 int main(int argc, char *argv[])
 {
     map<string, string> argm;
@@ -35,7 +40,7 @@ int main(int argc, char *argv[])
     {
         if(startsWith(argv[i]))
         {
-            cout << argv[i] << endl;
+            print(argv[i]);
             char *nextArg = argv[i + 1];
 
             if(i < argc - 1) 
@@ -46,6 +51,10 @@ int main(int argc, char *argv[])
         }
     }
 
-    cout << argm["--aaa"] << endl;
+    if (argm["--list"] != "")
+    {
+        print(argm["--list"]);
+    }
+
     return 0;
 }
