@@ -1,6 +1,7 @@
-#include<fstream>
-#include<iostream>
-#include<map>
+#include <fstream>
+#include <iostream>
+#include <map>
+#include <regex>
 
 using namespace std;
 
@@ -58,7 +59,11 @@ int main(int argc, char *argv[])
 
     if(argm[OP_DUE_DATE] != "")
     {
-       // validate datetime, if not valid, print error message and exit the program.
+       if(!regex_match(argm[OP_DUE_DATE], regex("^([\\d]+)$")))
+       {
+           print("\ndue date format error: \n\n-t [yyyymmdd]\n");
+           return 1;
+       }
        due_date = argm[OP_DUE_DATE];
     }
 
