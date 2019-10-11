@@ -1,10 +1,14 @@
 set -e
 
 DSL_PATH=/usr/local/etc/todo/dsl.txt
-rm -rf $DSL_PATH
+if [ -f $DSL_PATH ]; then
+    rm -rf $DSL_PATH
+fi
 mkdir -p /usr/local/etc/todo
 g++ src/main.cpp
 BIN_DIR=/usr/local/bin
 mv a.out $BIN_DIR/todo
 todo $@
-cat $DSL_PATH
+if [ -f $DSL_PATH ]; then
+    cat $DSL_PATH
+fi

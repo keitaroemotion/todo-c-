@@ -18,8 +18,9 @@ const string TODOS_DSL_FILE_PATH = "/usr/local/etc/todo/dsl.txt";
 const string OP_LIST             = "-l";
 const string OP_ADD              = "-a";
 const string OP_DUE_DATE         = "-t";
+const string OP_HELP             = "-h";
 
-bool startsWith(char *text)
+bool isOpCode(char *text)
 {
     return text[0] == '-';
 }
@@ -37,6 +38,20 @@ void writeToFile(string file_name, string content)
     file.close();
 }
 
+void showHelpMenu()
+{
+    print("");
+    print("todo -a [TODO CONTENT] -t [DUE DATE] ... add todo");
+    print("todo -l                              ... list todos");
+    print("todo -h                              ... help menu");
+    print("");
+}
+
+bool hasKey(map<string, string> argm, string key)
+{
+    return (argm.count(key) == 1);
+}
+
 int main(int argc, char *argv[])
 {
     map<string, string> argm;
@@ -45,13 +60,13 @@ int main(int argc, char *argv[])
 
     for(unsigned int i = 0; i < argc; i = i + 1 )
     {
-        if(startsWith(argv[i]))
+        if(isOpCode(argv[i]))
         {
             char *nextArg = argv[i + 1];
 
             if(i < argc - 1) 
             {
-                value = startsWith(argv[i + 1]) ? "" : argv[i + 1];
+                value = isOpCode(argv[i + 1]) ? "" : argv[i + 1];
             }
             argm[argv[i]] = value;
         }
@@ -68,18 +83,18 @@ int main(int argc, char *argv[])
     }
 
     //enlist TODO tags
-    if(argm[OP_LIST] != "")
+    if(hasKey(argm, OP_LIST))
     {
         print(argm[OP_LIST]);
     }
-    
-    //
-    // todo -a "content" -to 20191212 
-    //
-    if(argm[OP_ADD] != "")
+    else if(argm[OP_ADD] != "")
     {
         string content = argm[OP_ADD] + '|' + argm[OP_DUE_DATE];
         writeToFile(TODOS_DSL_FILE_PATH, content);
+    }
+    else if(hasKey(argm, OP_HELP))
+    {
+        showHelpMenu();
     }
 
     return 0;
