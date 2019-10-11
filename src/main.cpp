@@ -14,8 +14,9 @@ using namespace std;
 //
 //
 const string TODOS_DSL_FILE_PATH = "/usr/local/etc/todo/dsl.txt";
-const string OP_LIST             = "-l"
-const string OP_ADD              = "-a"
+const string OP_LIST             = "-l";
+const string OP_ADD              = "-a";
+const string OP_DUE_DATE         = "-t";
 
 bool startsWith(char *text)
 {
@@ -39,6 +40,7 @@ int main(int argc, char *argv[])
 {
     map<string, string> argm;
     string              value;
+    string              due_date; //yyyymmdd
 
     for(unsigned int i = 0; i < argc; i = i + 1 )
     {
@@ -54,16 +56,25 @@ int main(int argc, char *argv[])
         }
     }
 
+    if(argm[OP_DUE_DATE] != "")
+    {
+       // validate datetime, if not valid, print error message and exit the program.
+       due_date = argm[OP_DUE_DATE];
+    }
+
     //enlist TODO tags
     if(argm[OP_LIST] != "")
     {
         print(argm[OP_LIST]);
     }
-
+    
+    //
+    // todo -a "content" -to 20191212 
+    //
     if(argm[OP_ADD] != "")
     {
-        writeToFile(TODOS_DSL_FILE_PATH, argm[OP_ADD]);
-        print(argm[OP_ADD]);
+        string content = argm[OP_ADD] + '|' + argm[OP_DUE_DATE];
+        writeToFile(TODOS_DSL_FILE_PATH, content);
     }
 
     return 0;
