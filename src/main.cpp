@@ -1,3 +1,4 @@
+#include<fstream>
 #include<iostream>
 #include<map>
 
@@ -11,6 +12,8 @@ using namespace std;
 // --add,    -a ... add    [TODO]
 // --rm,     -r ... remove [TODO]
 //
+//
+const string TODOS_DSL_FILE_PATH = "dsl.txt";
 
 bool startsWith(char *text)
 {
@@ -29,6 +32,14 @@ bool startsWith(char *text)
 void print(string text)
 {
     cout << text << endl;
+}
+
+void writeToFile(string file_name, string content)
+{
+    ofstream file;
+    file.open(file_name, ios_base::app);
+    file << content + '\n';
+    file.close();
 }
 
 int main(int argc, char *argv[])
@@ -51,9 +62,16 @@ int main(int argc, char *argv[])
         }
     }
 
-    if (argm["--list"] != "")
+    //enlist TODO tags
+    if(argm["--list"] != "")
     {
         print(argm["--list"]);
+    }
+
+    if(argm["--add"] != "")
+    {
+        writeToFile(TODOS_DSL_FILE_PATH, argm["--add"]);
+        print(argm["--add"]);
     }
 
     return 0;
