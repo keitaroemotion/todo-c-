@@ -1,8 +1,9 @@
-#include<stdio.h>
+#include<iostream>
+
+using namespace std;
 
 int main()
-
 {
-    printf(“\n\nWelcome to my Homepage!!\n\n”);
-    return 0; 
+    cout << "\n\nHello World,\nWelcome to my first C ++ program on Ubuntu Linux\n\n" << endl;
+    return 0;
 }

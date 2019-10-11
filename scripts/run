@@ -1,0 +1,4 @@
+g++ src/main.cpp
+mkdir -p tmp
+mv a.out tmp
+./tmp/a.out
