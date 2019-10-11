@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {
     cout << "\n\nHello World,\nWelcome to my first C ++ program on Ubuntu Linux\n\n" << endl;
     return 0;
