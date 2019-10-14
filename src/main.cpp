@@ -96,6 +96,10 @@ int main(int argc, char *argv[])
     {
         showHelpMenu();
     }
+    else
+    {
+        showHelpMenu();
+    }
 
     return 0;
 }
