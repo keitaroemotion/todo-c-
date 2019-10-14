@@ -30,10 +30,28 @@ void print(string text)
     cout << text << endl;
 }
 
-void writeToFile(string file_name, string content)
+void readFile(string file_path)
+{
+   string   line;
+   ifstream file(file_path);
+   if(file.is_open())
+   {
+       while (getline(file, line))
+       {
+           cout << line << '\n';
+       }
+       file.close();
+   }
+   else
+   {
+       cout << "\nUnable to open file: " << file_path << "\n\n"; 
+   }
+}
+
+void writeToFile(string file_path, string content)
 {
     ofstream file;
-    file.open(file_name, ios_base::app);
+    file.open(file_path, ios_base::app);
     file << content + '\n';
     file.close();
 }
@@ -85,7 +103,7 @@ int main(int argc, char *argv[])
     //enlist TODO tags
     if(hasKey(argm, OP_LIST))
     {
-        print(argm[OP_LIST]);
+        readFile(TODOS_DSL_FILE_PATH);
     }
     else if(argm[OP_ADD] != "")
     {
